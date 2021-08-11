@@ -12,4 +12,5 @@ body {
 
 canvas {
     height: 100vh;
+    background-color: #101010;
 }

@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Plane, PerspectiveCamera } from "@react-three/drei";
+import {Box, Plane, Sphere} from "@react-three/drei";
+import {BufferGeometry} from "three";
 
 
 const Chapter1: FC = () => {
@@ -22,14 +23,28 @@ const Chapter1: FC = () => {
       camera={{ position: [-30, 40, 30], fov: 45 }}
     >
       <axesHelper scale={[20, 20, 20]} />
+      <spotLight
+        position={[-40, 60, -10]}
+        color={0xFFFFFF}
+      />
       <mesh>
         <Plane
           rotation={[-.5 * Math.PI, 0, 0]}
           scale={[60, 20, 0]}
           position={[15, 0, 0]}
         >
-          <meshBasicMaterial color={0xcccccc} />
+          <meshLambertMaterial color={0xcccccc} />
         </Plane>
+      </mesh>
+      <mesh >
+        <Box scale={[4, 4, 4]} position={[-4, 3, 0]}>
+          <meshLambertMaterial attach="material" color={0xff0000} />
+        </Box>
+      </mesh>
+      <mesh>
+        <Sphere scale={[4, 4, 4]} position={[20, 4, 2]}>
+          <meshLambertMaterial attach="material" color={0x7777FF} />
+        </Sphere>
       </mesh>
     </Canvas>
   )

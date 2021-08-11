@@ -101,3 +101,15 @@ export default Chapter1
 
 ### 5. Camera 
 
+```js
+<Canvas 
+  // ...
+  camera={{ position: [-30, 40, 30], fov: 45 }}
+/>
+```
+
+간단하게 Canvas 의 기본 카메라의 위치를 바꿔보자.
+
+<img width="830" alt="스크린샷 2021-08-12 오전 2 38 17" src="https://user-images.githubusercontent.com/70752848/129076925-d7e6a7dc-43c3-4884-ad6a-e9f82cd64292.png">
+
+### 6. Add Material, Light, Shadow
