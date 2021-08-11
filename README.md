@@ -6,6 +6,7 @@
 
 * three
 * @react-three-fiber
+* @react-three/fiber/drei
 * @emotion/react
 * @emotion/styled
 
@@ -26,4 +27,75 @@
 2) **Camera** : 장면을 렌더링할 때  어떻게 보여질 것인지 정의
 
 3) **Renderer** : **Scene** 객체가 **Camera** 객체의 각도에 따라 브라우저에서 어떻게 보이는지 산출하는 역할을 담당 ex) 그래픽 카드를 사용하도록 설정이 가능
+
+### 3. 뜬금없는 React(선언식 프로그래밍) 장점 & 주요 3 객체 정의
+
+**javascript(three)**
+```js
+let scene = new THREE.Scene();
+let camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+let renderer = new THREE.WebGLRenderer();
+renderer.setClearColorHex();
+renderer.setClearColor(new THREE.Color(0xEEEEEE));
+renderer.setSize(window.innerWidth, window.innerHeight);
+```
+
+뭔가 복잡해보이고 난잡한 느낌이 난다..
+
+**React(react-three/fiber)**
+```js
+// ...
+<Canvas style={{ backgroundColor: "#EEEEEE", width: '100vw', hegiht: '100vh' }}>
+	<perspectiveCamera fov={45} />
+</Canvas>
+// ...
+```
+
+정말 쉽고 편하게 직관적인 코드로 구현할 수 있다.
+
+### 4. AxesHelper & Plane
+
+```js
+import React, { FC } from "react";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, Plane } from "@react-three/drei";
+
+
+const Chapter1: FC = () => {
+
+	return (
+		<Canvas>
+			<perspectiveCamera
+				fov={45}
+			/>
+			<axesHelper scale={[20, 20, 20]}/>
+			<mesh>
+				<Plane scale={[60, 20, 0]}>
+					<meshBasicMaterial color={0xcccccc} />
+				</Plane>
+			</mesh>
+		</Canvas>
+	)
+}
+
+export default Chapter1
+```
+
+- AxesHelper: 보기 좋게 X,Y,Z 축을 보여줘 구현하는데 도움을 준다.
+- Plane: 평면을 생성해준다(가로:60, 세로: 20, 높이(두께랄까?): 0)
+
+<img width="830" alt="스크린샷 2021-08-12 오전 1 11 39" src="https://user-images.githubusercontent.com/70752848/129064943-183f328b-b9af-4672-a00a-b61e9f042376.png">
+
+
+```js
+<Plane
+  rotation={[-.5 * Math.PI, 0, 0]}
+  scale={[60, 20, 0]}
+  position={[15, 0, 0]}
+>
+```
+
+원하는 위치시키기 위해 rotation(회전) 및 position(이동) 을 조정한다.
+
+<img width="830" alt="스크린샷 2021-08-12 오전 1 46 54" src="https://user-images.githubusercontent.com/70752848/129069797-b8e0ba7a-f0e4-4c8b-8cec-3eb1188fdac7.png">
 

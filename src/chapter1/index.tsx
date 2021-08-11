@@ -1,6 +1,6 @@
-import React, {FC, useEffect} from "react";
-import * as Three from 'three'
-import {Canvas, events, render, RootState, useThree} from "@react-three/fiber";
+import React, { FC } from "react";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, Plane } from "@react-three/drei";
 
 
 const Chapter1: FC = () => {
@@ -24,6 +24,17 @@ const Chapter1: FC = () => {
       <perspectiveCamera
         fov={45}
       />
+      <axesHelper scale={[20, 20, 20]}/>
+      <mesh>
+        <Plane
+          rotation={[-.5 * Math.PI, 0, 0]}
+          scale={[60, 20, 0]}
+          position={[15, 0, 0]}
+        >
+          <meshBasicMaterial color={0xcccccc} />
+        </Plane>
+      </mesh>
+      <OrbitControls />
     </Canvas>
   )
 }
