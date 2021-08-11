@@ -1,9 +1,11 @@
 import React from 'react';
+import './Global.css'
+import Chapter1 from './chapter1';
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="App">
-      Initial App
+      <Chapter1 />
     </div>
   );
 }
