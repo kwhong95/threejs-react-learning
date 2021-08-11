@@ -113,3 +113,31 @@ export default Chapter1
 <img width="830" alt="스크린샷 2021-08-12 오전 2 38 17" src="https://user-images.githubusercontent.com/70752848/129076925-d7e6a7dc-43c3-4884-ad6a-e9f82cd64292.png">
 
 ### 6. Add Material, Light, Shadow
+
+```js
+<spotLight
+  position={[-40, 60, -10]}
+  color={0xFFFFFF}
+/>
+<mesh>
+  <Plane
+    rotation={[-.5 * Math.PI, 0, 0]}
+    scale={[60, 20, 0]}
+    position={[15, 0, 0]}
+  >
+    <meshLambertMaterial color={0xcccccc} />
+  </Plane>
+</mesh>
+<mesh >
+  <Box scale={[4, 4, 4]} position={[-4, 3, 0]}>
+    <meshLambertMaterial attach="material" color={0xff0000} />
+  </Box>
+</mesh>
+<mesh>
+  <Sphere scale={[4, 4, 4]} position={[20, 4, 2]}>
+    <meshLambertMaterial attach="material" color={0x7777FF} />
+  </Sphere>
+</mesh>
+```
+
+<img width="830" alt="스크린샷 2021-08-12 오전 3 12 57" src="https://user-images.githubusercontent.com/70752848/129081444-b63d1703-88f8-4c56-a6c6-66885db17378.png">
