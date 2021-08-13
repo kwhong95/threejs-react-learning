@@ -1,16 +1,14 @@
 import React, { FC } from "react";
 import { Canvas } from "@react-three/fiber";
-import {Box, Plane, Sphere} from "@react-three/drei";
-import {BufferGeometry} from "three";
-
+import { Box, Plane, Sphere } from "@react-three/drei";
 
 const Chapter1: FC = () => {
-
   return (
     <Canvas
       /* 아래 세팅은 전부 Default 값이다. */
+      style={{ background: "#232323" }}
       gl={undefined}
-      shadows={false} //  gl.shadowMap에 들어가는 props도 PCFsoft의 경우 true로 설정할 수 있다.
+      shadows //  gl.shadowMap에 들어가는 props도 PCFsoft의 경우 true로 설정할 수 있다.
       vr={false} // Renderer 를 VR 모드로 전환한 다음 gl.setAnimation 을 사용
       mode="blocking" //  React mode: legacy, blocking, concurrent
       frameloop="always" //  Render mode: always, demand, never
@@ -21,29 +19,30 @@ const Chapter1: FC = () => {
       onCreated={(state => {})} // Canvas가 렌더링된 후 callback (아직 커밋되지 않음)
       onPointerMissed={(event => {})} // 대상을 놓친 포인터 클릭에 대한 응답
       camera={{ position: [-30, 40, 30], fov: 45 }}
+
     >
       <axesHelper scale={[20, 20, 20]} />
       <spotLight
         position={[-40, 60, -10]}
-        color={0xFFFFFF}
+        color={0xffffff}
+        castShadow
       />
-      <mesh>
         <Plane
           rotation={[-.5 * Math.PI, 0, 0]}
-          scale={[60, 20, 0]}
+          scale={[60, 20, 1]}
           position={[15, 0, 0]}
+          receiveShadow
         >
-          <meshLambertMaterial color={0xcccccc} />
+          <meshLambertMaterial attach="material" color={0xffffff} />
         </Plane>
-      </mesh>
       <mesh >
-        <Box scale={[4, 4, 4]} position={[-4, 3, 0]}>
+        <Box scale={[4, 4, 4]} position={[-4, 3, 0]} castShadow>
           <meshLambertMaterial attach="material" color={0xff0000} />
         </Box>
       </mesh>
       <mesh>
-        <Sphere scale={[4, 4, 4]} position={[20, 4, 2]}>
-          <meshLambertMaterial attach="material" color={0x7777FF} />
+        <Sphere scale={[4, 4, 4]} position={[20, 4, 2]} castShadow>
+          <meshLambertMaterial attach="material" color={0x7777ff} />
         </Sphere>
       </mesh>
     </Canvas>
