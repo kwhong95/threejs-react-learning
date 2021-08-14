@@ -1,10 +1,12 @@
 import React, { useRef, FC }  from "react";
 import { useFrame } from "@react-three/fiber";
 import { Mesh } from "three";
+import {IData} from "./index";
 
 interface BoxProps {
   position: number[];
   castShadow: boolean;
+  data: IData
 }
 
 const Box: FC<BoxProps> = (
@@ -14,9 +16,9 @@ const Box: FC<BoxProps> = (
 
 
   useFrame(() => {
-    mesh.current.rotation.x += .02;
-    mesh.current.rotation.y += .02;
-    mesh.current.rotation.z += .02;
+    mesh.current.rotation.x += props.data.rotationSpeed;
+    mesh.current.rotation.y += props.data.rotationSpeed;
+    mesh.current.rotation.z += props.data.rotationSpeed;
   })
 
 

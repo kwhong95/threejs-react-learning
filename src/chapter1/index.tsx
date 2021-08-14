@@ -1,12 +1,31 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Plane,  Stats } from "@react-three/drei";
 import Box from "./Box";
-import Sphere from './Sphere'
+import Sphere from './Sphere';
+import DatGui, {DatNumber} from "react-dat-gui";
+import 'react-dat-gui/dist/index.css'
+
+export interface IData {
+  rotationSpeed: number
+  bouncingSpeed: number
+}
 
 const Chapter1: FC = () => {
+  const [data, setData] = useState<IData>({
+    rotationSpeed: 0.02,
+    bouncingSpeed: 0.03,
+  } as IData);
+
+  const handleUpdate = (newData: IData) => {
+    setData(((prevState: IData) => (
+        { ...prevState, ...newData }
+      )
+    ))
+  }
 
   return (
+    <>
     <Canvas
       /* 아래 세팅은 전부 Default 값이다. */
       style={{ background: "#232323" }}
@@ -24,26 +43,51 @@ const Chapter1: FC = () => {
       camera={{ position: [-30, 40, 30], fov: 45 }}
 
     >
-      <axesHelper scale={[20, 20, 20]} />
       <Stats
         showPanel={0}
       />
+      <axesHelper scale={[20, 20, 20]} />
       <spotLight
         position={[-40, 60, -10]}
         color={0xffffff}
         castShadow
       />
-      <Plane
-        rotation={[-.5 * Math.PI, 0, 0]}
-        scale={[60, 20, 1]}
-        position={[15, 0, 0]}
-        receiveShadow
-      >
+        <Plane
+          rotation={[-.5 * Math.PI, 0, 0]}
+          scale={[60, 20, 1]}
+          position={[15, 0, 0]}
+          receiveShadow
+        >
         <meshLambertMaterial attach="material" color={0xffffff} />
       </Plane>
-      <Box position ={[-4, 3, 0]} castShadow />
-      <Sphere position={[20, 4, 2]} castShadow />
+      <Box
+        data={data}
+        position ={[-4, 3, 0]}
+        castShadow
+      />
+      <Sphere
+        data={data}
+        position={[20, 4, 2]}
+        castShadow
+      />
     </Canvas>
+        <DatGui data={data} onUpdate={handleUpdate}>
+          <DatNumber
+            path="rotationSpeed"
+            label="RotationSpeed"
+            min={0}
+            max={.5}
+            step={0.01}
+          />
+          <DatNumber
+            path="bouncingSpeed"
+            label="BouncingSpeed"
+            min={0}
+            max={.5}
+            step={0.01}
+          />
+        </DatGui>
+    </>
   )
 }
 
