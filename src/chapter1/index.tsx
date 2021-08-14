@@ -3,8 +3,8 @@ import { Canvas } from "@react-three/fiber";
 import { Plane,  Stats } from "@react-three/drei";
 import Box from "./Box";
 import Sphere from './Sphere';
-import DatGui, {DatNumber} from "react-dat-gui";
 import 'react-dat-gui/dist/index.css'
+import DatGui, { DatNumber } from "react-dat-gui";
 
 export interface IData {
   rotationSpeed: number
