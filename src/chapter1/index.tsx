@@ -1,7 +1,8 @@
 import React, { FC } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Plane, Sphere, Stats } from "@react-three/drei";
+import { Plane,  Stats } from "@react-three/drei";
 import Box from "./Box";
+import Sphere from './Sphere'
 
 const Chapter1: FC = () => {
 
@@ -41,9 +42,7 @@ const Chapter1: FC = () => {
         <meshLambertMaterial attach="material" color={0xffffff} />
       </Plane>
       <Box position ={[-4, 3, 0]} castShadow />
-      <Sphere scale={[4, 4, 4]} position={[20, 4, 2]} castShadow>
-        <meshLambertMaterial attach="material" color={0x7777ff} />
-      </Sphere>
+      <Sphere position={[20, 4, 2]} castShadow />
     </Canvas>
   )
 }
