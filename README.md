@@ -141,3 +141,41 @@ export default Chapter1
 ```
 
 <img width="830" alt="스크린샷 2021-08-12 오전 3 12 57" src="https://user-images.githubusercontent.com/70752848/129081444-b63d1703-88f8-4c56-a6c6-66885db17378.png">
+
+```typescript jsx
+// ...
+import {Sphere} from "@react-three/drei";
+
+<spotLight
+  // ...
+  castShadow
+/>
+<Plane
+  // ...
+  reciveShadow
+>
+  <meshLambertMaterial attach="material"/>
+</Plane>
+<Box
+  // ...
+  castShadow
+>
+  <meshLambertMaterial attach="material"/>
+</Box>
+<Sphere
+  // ...
+  castShadow
+>
+  <meshLambertMaterial attach="material" />
+</Sphere>
+```
+
+![스크린샷 2021-08-13 오후 10 11 31](https://user-images.githubusercontent.com/70752848/129362029-c9febbb4-6b02-4a7c-a6c9-ea013254d1b5.png)
+
+
+그림자 렌더링은 컴퓨팅 파워가 많이 필요하기 때문에, Three.js에서 기본 설정으로 비활성화되어 있다.
+위처럼 그림자가 필요함을 선언하고 장면의 어떤 광원에서 그림자를 그릴지 정의해야 한다.
+
+### 7. 애니메이션으로 장면 개선
+
+#### requestAnimationFrame 

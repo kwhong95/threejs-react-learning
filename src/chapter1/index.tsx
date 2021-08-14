@@ -1,8 +1,10 @@
 import React, { FC } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Box, Plane, Sphere } from "@react-three/drei";
+import { Stats } from "@react-three/drei"
 
 const Chapter1: FC = () => {
+
   return (
     <Canvas
       /* 아래 세팅은 전부 Default 값이다. */
@@ -22,6 +24,9 @@ const Chapter1: FC = () => {
 
     >
       <axesHelper scale={[20, 20, 20]} />
+      <Stats
+        showPanel={0}
+      />
       <spotLight
         position={[-40, 60, -10]}
         color={0xffffff}
