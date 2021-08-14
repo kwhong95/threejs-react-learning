@@ -13,11 +13,12 @@ const Box: FC<BoxProps> = (
   const mesh = useRef<Mesh>(null!);
 
 
-  useFrame((state, delta) => {
+  useFrame(() => {
     mesh.current.rotation.x += .02;
     mesh.current.rotation.y += .02;
     mesh.current.rotation.z += .02;
   })
+
 
   return (
     <mesh {...props} ref={mesh}>
