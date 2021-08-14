@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Box, Plane, Sphere } from "@react-three/drei";
-import { Stats } from "@react-three/drei"
+import { Plane, Sphere, Stats } from "@react-three/drei";
+import Box from "./Box";
 
 const Chapter1: FC = () => {
 
@@ -32,24 +32,18 @@ const Chapter1: FC = () => {
         color={0xffffff}
         castShadow
       />
-        <Plane
-          rotation={[-.5 * Math.PI, 0, 0]}
-          scale={[60, 20, 1]}
-          position={[15, 0, 0]}
-          receiveShadow
-        >
-          <meshLambertMaterial attach="material" color={0xffffff} />
-        </Plane>
-      <mesh >
-        <Box scale={[4, 4, 4]} position={[-4, 3, 0]} castShadow>
-          <meshLambertMaterial attach="material" color={0xff0000} />
-        </Box>
-      </mesh>
-      <mesh>
-        <Sphere scale={[4, 4, 4]} position={[20, 4, 2]} castShadow>
-          <meshLambertMaterial attach="material" color={0x7777ff} />
-        </Sphere>
-      </mesh>
+      <Plane
+        rotation={[-.5 * Math.PI, 0, 0]}
+        scale={[60, 20, 1]}
+        position={[15, 0, 0]}
+        receiveShadow
+      >
+        <meshLambertMaterial attach="material" color={0xffffff} />
+      </Plane>
+      <Box position ={[-4, 3, 0]} castShadow />
+      <Sphere scale={[4, 4, 4]} position={[20, 4, 2]} castShadow>
+        <meshLambertMaterial attach="material" color={0x7777ff} />
+      </Sphere>
     </Canvas>
   )
 }
