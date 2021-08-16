@@ -1,12 +1,23 @@
 import React from "react";
 import * as THREE from 'three';
 
+interface PlaneProps {
+  position: [x: number, y: number, z: number];
+  args: [
+    width: number,
+    height: number,
+    widthSegment: number,
+    heigthSegment: number
+  ];
+}
 
 
-const Plane = (): JSX.Element => {
+const Plane = (
+  { position, args }: PlaneProps
+): JSX.Element => {
   return (
-    <mesh position={[0, 0, 0]}>
-      <planeGeometry attach="geometry" args={[60, 40, 1, 1]}  />
+    <mesh position={position}>
+      <planeGeometry attach="geometry" args={args}  />
       <meshBasicMaterial
         attach="material"
         color={0xffffff}
