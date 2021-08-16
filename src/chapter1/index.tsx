@@ -1,9 +1,9 @@
-import React, { FC, useState } from "react";
-import { Canvas } from "@react-three/fiber";
-import { Plane,  Stats } from "@react-three/drei";
+import React, {FC, useEffect, useRef, useState} from "react";
+import {Camera, Canvas} from "@react-three/fiber";
+import {OrbitControls, PerspectiveCamera, Plane, Stats} from "@react-three/drei";
 import Box from "./Box";
 import Sphere from './Sphere';
-import 'react-dat-gui/dist/index.css'
+
 import DatGui, { DatNumber } from "react-dat-gui";
 
 export interface IData {
@@ -12,6 +12,7 @@ export interface IData {
 }
 
 const Chapter1: FC = () => {
+  const cameraRef = useRef<Camera | any>(null!)
   const [data, setData] = useState<IData>({
     rotationSpeed: 0.02,
     bouncingSpeed: 0.03,
@@ -23,6 +24,20 @@ const Chapter1: FC = () => {
       )
     ))
   }
+
+  const onResize = () => {
+    cameraRef.current.aspect  = window.innerWidth  / window.innerHeight;
+    cameraRef.current.updateProjectionMatrix();
+
+  }
+
+  useEffect(() => {
+    console.log(cameraRef.current.aspect)
+    window.addEventListener('resize', onResize)
+
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+
 
   return (
     <>
@@ -40,9 +55,14 @@ const Chapter1: FC = () => {
       linear={false} // 자동 sRGB 인코딩 및 감마 보정 OFF false = ON!
       onCreated={(state => {})} // Canvas가 렌더링된 후 callback (아직 커밋되지 않음)
       onPointerMissed={(event => {})} // 대상을 놓친 포인터 클릭에 대한 응답
-      camera={{ position: [-30, 40, 30], fov: 45 }}
-
     >
+      <PerspectiveCamera
+        makeDefault
+        position={[-60, 40, 30]}
+        fov={45}
+        ref={cameraRef}
+      />
+      <OrbitControls />
       <Stats
         showPanel={0}
       />
